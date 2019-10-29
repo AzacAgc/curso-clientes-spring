@@ -17,6 +17,8 @@ export class FormComponent implements OnInit {
 
   cliente = new Cliente();
 
+  errores: string[] = [];
+
   constructor (
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -31,6 +33,9 @@ export class FormComponent implements OnInit {
     this._clientesService.create(this.cliente).subscribe(json => {
       this.router.navigate(['/clientes']);
       Swal.fire('Nuevo cliente', `Cliente ${ json.cliente.nombre } creado con éxito.`, 'success');
+    }, err => {
+        this.errores = err.error.errors;
+        console.error('Back Create: ', err.status, ' >> ', err.error.errors);
     });
   }// end of create
 
@@ -47,6 +52,9 @@ export class FormComponent implements OnInit {
     this._clientesService.update(this.cliente).subscribe(cliente => {
       this.router.navigate(['/clientes']);
       Swal.fire('Cliente actualizado', `Cliente ${ cliente.nombre } actualizado con éxito.`, 'success');
+    }, err => {
+      this.errores = err.error.errors;
+      console.error('Back Update: ', err.status, ' >> ', err.error.errors);
     });
   }// end of update
 

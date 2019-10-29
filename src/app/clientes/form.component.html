@@ -1,3 +1,9 @@
+<ul class="alert alert-danger" *ngIf="errores?.length > 0">
+  <li *ngFor="let err of errores">
+    {{ err }}
+  </li>
+</ul>
+
 <div class="card bg-dark text-white">
   <div class="card-header font-weight-bold  "> {{ titulo }} </div>
   <div class="card-body">
@@ -8,7 +14,7 @@
         <label for="nombre" class="col-form-label col-sm-2"> Nombre </label>
         <div class="col-sm-6">
           <input type="text" name="nombre" id="nombre" class="form-control" [(ngModel)]="cliente.nombre"
-          required minlength="4" #nombre="ngModel">
+           #nombre="ngModel"> <!-- required minlength="4" -->
 
           <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
             <div *ngIf="nombre.errors.required">
@@ -25,7 +31,7 @@
         <label for="apellido" class="col-form-label col-sm-2"> Apellido </label>
         <div class="col-sm-6">
           <input type="text" name="apellido" id="apellido" class="form-control" [(ngModel)]="cliente.apellido"
-          required #apellido="ngModel">
+          #apellido="ngModel">
 
           <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
             <div *ngIf="apellido.errors.required">
@@ -39,7 +45,7 @@
         <label for="email" class="col-form-label col-sm-2"> Email </label>
         <div class="col-sm-6">
           <input type="text" name="email" id="email" class="form-control" [(ngModel)]="cliente.email"
-          required email #email="ngModel">
+           email #email="ngModel">
 
           <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
             <div *ngIf="email.errors.required">
@@ -49,6 +55,13 @@
               El email debe tener un formato válido.
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="createAt" class="col-form-label col-sm-2"> Fecha </label>
+        <div class="col-sm-6">
+          <input type="date" name="createAt" id="createAt" class="form-control" [(ngModel)]="cliente.createAt">
         </div>
       </div>
 

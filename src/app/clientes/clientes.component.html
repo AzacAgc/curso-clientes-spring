@@ -29,9 +29,9 @@
         <tr *ngFor="let cliente of clientes">
           <td> {{ cliente.id }} </td>
           <td> {{ cliente.nombre }} </td>
-          <td> {{ cliente.apellido }} </td>
+          <td> {{ cliente.apellido | uppercase }} </td>
           <td> {{ cliente.email }} </td>
-          <td> {{ cliente.createAt }} </td>
+          <td> {{ cliente.createAt | date:"EEE dd, MMM yyyy" }} </td>
           <td>
             <button type="button" name="editar" class="btn btn-success"
               [routerLink]="['/clientes/form', cliente.id]">
@@ -46,6 +46,8 @@
         </tr>
       </tbody>
     </table>
+
+    <app-paginator *ngIf="paginador" [paginador]="paginador"></app-paginator>
 
   </div>
 </div>
